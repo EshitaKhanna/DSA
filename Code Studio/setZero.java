@@ -1,3 +1,7 @@
+/*
+ * Striver SDE Sheet Problems
+ * Question: https://www.codingninjas.com/studio/problems/set-matrix-zeros_3846774?topList=striver-sde-sheet-problems
+ */ 
 public class setZero {
 	public static void setZeros(int matrix[][]) {
 		// Write your code here..

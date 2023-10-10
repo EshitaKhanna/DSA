@@ -1,10 +1,3 @@
-package DSA.Arrays;
-
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
-
 public class array {
 	public static int[] pushZerosAtEnd(int[] arr) {
 		int n = arr.length;

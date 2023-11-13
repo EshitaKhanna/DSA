@@ -3,7 +3,7 @@
  * https://leetcode.com/problems/count-pairs-whose-sum-is-less-than-target/description/    
 */
 
-package DSA.DSA.Leetcode;
+package DSA.Leetcode;
 
 import java.util.Arrays;
 import java.util.List;

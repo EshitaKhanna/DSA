@@ -1,5 +1,5 @@
 /*
- * 2824. Count Pairs Whose Sum is Less than Target
+ * 1. Two Sum
  * https://leetcode.com/problems/two-sum/description/    
 */
 

@@ -32,7 +32,7 @@ public class Searching {
 		int arr[] = {1,2,5,3,0};
 		System.out.println(linearSearch(arr, 0));
 		Arrays.sort(arr);
-		System.out.println(binarySearch(arr, 0));
+		System.out.println(binarySearch(arr, 2));
 
 	}
 

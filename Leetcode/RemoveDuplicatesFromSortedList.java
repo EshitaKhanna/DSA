@@ -2,6 +2,8 @@
  * 83. Remove Duplicates from Sorted List
  * https://leetcode.com/problems/remove-duplicates-from-sorted-list/description/
 */
+package DSA.Leetcode;
+
 public class RemoveDuplicatesFromSortedList {
     public static ListNode deleteDuplicates(ListNode head) {
         if(head == null){
@@ -20,7 +22,7 @@ public class RemoveDuplicatesFromSortedList {
         }
         return head;
     }
-
+    
     public static void main(String[] args) {
         ListNode node1 = new ListNode(10);
         ListNode node2 = new ListNode(10);

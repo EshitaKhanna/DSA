@@ -2,6 +2,7 @@
  * 876. Middle of the Linked List
  * https://leetcode.com/problems/middle-of-the-linked-list/description/
 */
+
 public class MiddleOfLinkedList {
     
     public static ListNode middleNode(ListNode head) {

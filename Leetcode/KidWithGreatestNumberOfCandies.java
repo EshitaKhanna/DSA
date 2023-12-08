@@ -30,7 +30,7 @@ public class KidWithGreatestNumberOfCandies {
     public static void main(String[] args) {
         int candies[] = {2,3,5,1,3};
         for(boolean flag : kidsWithCandies(candies, 3)){
-            System.out.print(flag + " ");
+            System.out.print(flag + "  ");
         }
 
     }

@@ -2,10 +2,9 @@
  * 21. Merge Two Sorted Lists
  * https://leetcode.com/problems/merge-two-sorted-lists/description/
 */
-package DSA.Leetcode
+package DSA.Leetcode;
 public class MergeTwoSortedLists {
-
-    public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
+    public static ListNode mergeTwoLists(ListNode list1, ListNode list2) {
         if(list1 == null){
             return list2;
         }

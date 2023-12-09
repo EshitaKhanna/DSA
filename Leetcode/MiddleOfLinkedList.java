@@ -3,6 +3,7 @@
  * https://leetcode.com/problems/middle-of-the-linked-list/description/
 */
 
+package DSA.Leetcode;
 public class MiddleOfLinkedList {
     
     public static ListNode middleNode(ListNode head) {

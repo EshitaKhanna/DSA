@@ -22,26 +22,33 @@ public class QueueUsingStack {
     }
 
     int dequeue(){
-        while(!s1.isEmpty()){
-            int ele = s1.pop();
-            s2.push(ele);
+        if (s2.isEmpty()) {
+            while (!s1.isEmpty()) {
+                s2.push(s1.pop());
+            }
+         }
+    
+        if (s2.isEmpty()) {
+            return -1; // The queue is empty
         }
-        int del_ele = s2.pop();
-        size -- ;
 
-        while(!s2.isEmpty()){
-            s1.push(s2.pop());
-        }
-        return del_ele;
+        int del_ele = s2.pop();
+        size--;
+
+        return del_ele; 
+    
 
     }
 
     int peek(){
-        while(!s1.isEmpty()){
+        if(s2.isEmpty()){
+            while(!s1.isEmpty()){
             int ele = s1.pop();
             s2.push(ele);
+            }
         }
-        return s2.peek();
+    
+        return s2.isEmpty() ? -1 : s2.peek();
     }
 
     boolean isEmpty(){

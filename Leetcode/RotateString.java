@@ -9,13 +9,20 @@ public class RotateString {
         if(s.length() != goal.length() || s==null || goal==null){
             return false;
         }
-
+        //Method 1
+        /* 
         for(int i=0; i<s.length(); i++){
             if(rotate(s,i).equals(goal)){
                 return true;
             }
         }
+        */
 
+        //Method 2
+        String concat = s+s;
+        if(concat.contains(goal)){
+            return true;
+        }
         return false;
 
     }

@@ -1,5 +1,6 @@
 package DSA.BinaryTrees;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Scanner;
@@ -387,9 +388,239 @@ public class BinaryTreeUse {
     }
 
     public static void nodesAtDistanceK(BinaryTreeNode<Integer> root, int node, int k) {
-
     }    
 
+    public static int minimumValue(BinaryTreeNode<Integer> root){
+        if(root == null){
+            return Integer.MAX_VALUE;
+        }
+        return Math.min(root.data, Math.min(minimumValue(root.left), minimumValue(root.right)));
+    }
+
+    public static int maximumValue(BinaryTreeNode<Integer> root){
+        if(root == null){
+            return Integer.MIN_VALUE;
+        }
+        return Math.max(root.data, Math.max(maximumValue(root.left), maximumValue(root.right)));
+    }
+    
+    public static boolean isBST(BinaryTreeNode<Integer> root){
+        if(root == null){
+            return true;
+        }
+        int rightMin = minimumValue(root.right);
+        int leftMax = maximumValue(root.left); 
+        if(root.data <= leftMax || root.data > rightMin){
+            return false;
+        }
+        boolean left = isBST(root.left);
+        boolean right = isBST(root.right);
+
+        return left && right;
+    }
+
+    public static Pair<Boolean, Pair<Integer, Integer>> isBST2(BinaryTreeNode<Integer> root){
+        if(root == null){
+            Pair<Boolean, Pair<Integer, Integer>> output = new Pair<Boolean, Pair<Integer, Integer>>();
+            output.first = true;
+            output.second = new Pair<Integer, Integer>();
+            output.second.first = Integer.MAX_VALUE;
+            output.second.second = Integer.MIN_VALUE;
+
+            return output;
+        }
+        Pair<Boolean, Pair<Integer, Integer>> leftOutput = isBST2(root.left);
+        Pair<Boolean, Pair<Integer, Integer>> rightOutput = isBST2(root.right);
+
+        int min = Math.min(root.data, Math.min(leftOutput.second.first, rightOutput.second.first));
+        int max = Math.max(root.data, Math.max(leftOutput.second.second, rightOutput.second.second));
+        boolean isBST = (root.data > leftOutput.second.second) 
+                        && (root.data <= rightOutput.second.first)
+                        && leftOutput.first 
+                        && rightOutput.first;
+
+        Pair<Boolean, Pair<Integer, Integer>> output = new Pair<Boolean, Pair<Integer, Integer>>();
+        output.first = isBST;
+        output.second = new Pair<Integer, Integer>();
+        output.second.first = min;
+        output.second.second = max;
+
+        return output;
+        
+    }
+
+    public static BinaryTreeNode<Integer> constructBST(int[] arr, int low, int high){
+        if(high < low){
+            return null;
+        }
+        int mid = (high+low)/2;
+        BinaryTreeNode<Integer> root = new BinaryTreeNode<Integer>(arr[mid]);
+        root.left = constructBST(arr, low, mid-1);
+        root.right = constructBST(arr, mid+1, high);
+
+        return root;
+    }
+    
+    public static boolean searchInBST(BinaryTreeNode<Integer> root, int k) {
+        if(root == null){
+            return false;
+        }
+        if(root.data == k){
+            return true;
+        }
+        else if(k < root.data){
+            return searchInBST(root.left, k);
+        }
+        else{
+            return searchInBST(root.right, k);
+        }
+    }
+    
+    public static void elementsInRangeK1K2(BinaryTreeNode<Integer> root,int k1,int k2){
+        if(root == null){
+            return;
+        }
+
+        if(root.data < k1){
+            elementsInRangeK1K2(root.right, k1, k2);
+        }
+        else if(root.data > k2){
+            elementsInRangeK1K2(root.left,k1,k2);
+        }
+        else{
+            elementsInRangeK1K2(root.left,k1,k2);
+            System.out.println(root.data + " ");
+            elementsInRangeK1K2(root.right,k1,k2);
+        }
+    }
+    
+    public static ArrayList<Integer> getRootToNodePath(BinaryTreeNode<Integer> root, int data){
+        if(root == null){
+            return null;
+        }
+        if(root.data == data){
+            ArrayList<Integer> output = new ArrayList<>();
+            output.add(root.data);
+            return output;
+        }
+
+        ArrayList<Integer> leftOutput = getRootToNodePath(root.left, data);
+        if(leftOutput != null){
+            leftOutput.add(root.data);
+            return leftOutput;
+        }
+
+        ArrayList<Integer> rightOutput = getRootToNodePath(root.right, data);
+        if(rightOutput != null){
+            rightOutput.add(root.data);
+            return rightOutput;
+        }else{
+            return null; // not found in left, right subtree or root
+        }
+
+    }
+    
+    public static int largestBSTSubtree(BinaryTreeNode<Integer> root) {
+        if(isBST(root)){
+            return height(root);
+        }
+        else{
+            int leftOutput = largestBSTSubtree(root.left);
+            int rightOutput = largestBSTSubtree(root.right);
+
+            return Math.max(leftOutput, rightOutput);
+        }
+    }
+    
+    private static ArrayList<Integer> BSTtoArray(BinaryTreeNode<Integer> root){
+        if(root == null){
+            ArrayList<Integer> arr = new ArrayList<Integer>();
+            return arr;
+        }
+
+        ArrayList<Integer> arr = new ArrayList<Integer>();
+
+        ArrayList<Integer> left = BSTtoArray(root.left);
+        ArrayList<Integer> right = BSTtoArray(root.right);
+
+        if(left !=null){
+            arr.addAll(left);
+        }
+        arr.add(root.data);
+        if(right != null){
+            arr.addAll(right);
+        }
+
+        return arr;
+        
+    }
+    
+    private static void pairSum(ArrayList<Integer> arr, int s){
+        int start = 0;
+        int end = arr.size()-1;
+
+        while(start < end){
+            int sum = arr.get(start) + arr.get(end);
+            if(sum > s){
+                end--;
+            }else if(sum < s){
+                start++;
+            }else{
+                System.out.println(arr.get(start) + " " + arr.get(end));
+                start++;
+                end--;
+            }
+        }
+    }
+
+    public static void printNodesSumToS(BinaryTreeNode<Integer> root, int s) {
+        if(root == null){
+            return;
+        }
+        ArrayList<Integer> arr = BSTtoArray(root);
+        pairSum(arr, s);
+
+    }
+    
+    private static Pair<Integer, BinaryTreeNode<Integer>> isCousinHelper (BinaryTreeNode<Integer> root, 
+                                                            int val, BinaryTreeNode<Integer> parent, 
+                                                            int level){
+        if(root == null){
+            return null;
+        }
+        if(root.data == val){
+            Pair<Integer,BinaryTreeNode<Integer>> output = new Pair<>();
+            output.first = level;
+            output.second = parent;
+            
+            return output;
+        }
+        Pair<Integer,BinaryTreeNode<Integer>> leftOutput = isCousinHelper(root.left, val, parent, level+1);
+        Pair<Integer,BinaryTreeNode<Integer>> rightOutput = isCousinHelper(root.right, val, parent, level+1);
+
+        if(leftOutput == null){
+            return rightOutput;
+        }else{
+            return leftOutput;
+        }
+        
+
+    }
+   
+    public static boolean isCousin(BinaryTreeNode<Integer> root, int p, int q) {
+        // cousin if:
+        // p.level == q.level and
+        // p.parent != q.parent
+
+        // let in pair class first = level and second = parent;
+        Pair<Integer,BinaryTreeNode<Integer>> pPair = isCousinHelper(root, p, null, 0);
+        Pair<Integer,BinaryTreeNode<Integer>> qPair = isCousinHelper(root, q, null, 0);
+
+        if((pPair.first == qPair.first) && (pPair.second != qPair.second)){
+            return true;
+        }
+        return false;
+    }
     public static void main(String[] args) {
         Scanner s = new Scanner(System.in);
         BinaryTreeNode<Integer> root = takeInputLevelWise();

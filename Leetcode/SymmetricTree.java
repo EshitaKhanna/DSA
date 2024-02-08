@@ -23,4 +23,7 @@ public class SymmetricTree {
                 && (isMirror(p.left, q.right) && isMirror(p.right, q.left));
         
     }
+    public static void main(String[] args) {
+        
+    }
 }
